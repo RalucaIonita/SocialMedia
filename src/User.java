@@ -1,14 +1,31 @@
 public class User extends Account
 {
-    protected String firstName;
-    protected String lastName;
-    protected String userName;
+    private String firstName;
+    private String lastName;
+    private String email;
+
 
     protected Profile profile;
 
 
+    public User(String givenEmail, String givenPassword, String firstName, String lastName, String username)
+    {
+        super(givenEmail, givenPassword);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+    }
+
     public String getFirstName() {
         return firstName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setFirstName(String firstName) {
@@ -23,14 +40,6 @@ public class User extends Account
         this.lastName = lastName;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public Profile getProfile() {
         return profile;
     }
@@ -38,4 +47,6 @@ public class User extends Account
     public void setProfile(Profile profile) {
         this.profile = profile;
     }
+
+
 }

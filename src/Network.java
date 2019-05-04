@@ -28,7 +28,6 @@ public class Network
 
     }
 
-
     void removeFriendRelationship(User firstUser, User secondUser)
     {
         if(adiacencyMatrix[firstUser.getID()][secondUser.getID()] == 1)

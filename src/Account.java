@@ -1,26 +1,37 @@
+import java.sql.SQLException;
 
 public class Account
 {
     //Data
     protected static Integer ID;
     protected String password;
-    public String email;
+  //  protected String email;
+    protected String username;
 
     //Methods
 
     //Constructors
     Account() {};
 
-    Account(int givenID, String givenEmail, String givenPassword)
+
+    Account(String givenUsername, String givenPassword)
     {
-        ID = givenID;
-        email = givenEmail;
+        username = givenUsername;
         password = givenPassword;
     }
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     Account(Account givenAccount)
     {
         ID = givenAccount.ID;
-        email = givenAccount.email;
         password = givenAccount.password;
     }
 
@@ -34,15 +45,6 @@ public class Account
     }
 
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-
     public String getPassword() {
         return password;
     }
@@ -50,5 +52,6 @@ public class Account
     public void setPassword(String password) {
         this.password = password;
     }
+
 
 }
