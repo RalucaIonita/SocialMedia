@@ -4,7 +4,7 @@ public class DataBase
 {
     private Connection dataBaseConnection;
 
-    private static DataBase instance;
+    private static DataBase dataBaseInstance;
 
     //
 
@@ -15,11 +15,11 @@ public class DataBase
 
     public static DataBase getInstance() throws SQLException
     {
-        if(instance == null)
+        if(dataBaseInstance == null)
         {
-            instance = new DataBase();
+            dataBaseInstance = new DataBase();
         }
-        return instance;
+        return dataBaseInstance;
     }
 
     //
@@ -29,7 +29,7 @@ public class DataBase
        PreparedStatement thisStatement = DataBase.getInstance().dataBaseConnection.prepareStatement("INSERT INTO accounts (first_name, last_name, email, username, password) values (?, ?, ?, ?, ?)");
        thisStatement.setString(1, newUser.getFirstName());
        thisStatement.setString(2, newUser.getLastName());
-       thisStatement.setString(3, "this");//newUser.getEmail());
+       thisStatement.setString(3, newUser.getEmail());
        thisStatement.setString(4, newUser.getUsername());
        thisStatement.setString(5, newUser.getPassword());
 
@@ -38,15 +38,17 @@ public class DataBase
 
     public void delete(String givenUsername) throws SQLException
     {
-        PreparedStatement thisStatement = DataBase.getInstance().dataBaseConnection.prepareStatement("DELETE FROM accounts WHERE username = givenUsername; ");
+        PreparedStatement thisStatement = DataBase.getInstance().dataBaseConnection.prepareStatement("DELETE FROM accounts WHERE username = ?");
+        thisStatement.setString(1, givenUsername);
         thisStatement.executeUpdate();
+
     }
 
     public User selectByUsername(String givenUsername) throws SQLException
     {
         User resultedAccount = null;
         PreparedStatement thisStatement = dataBaseConnection.prepareStatement("SELECT * from accounts WHERE username = ?");
-        thisStatement.setString(1,givenUsername);
+        thisStatement.setString(1, givenUsername);
         ResultSet result = thisStatement.executeQuery();
         while(result.next())
         {
@@ -70,7 +72,7 @@ public class DataBase
     }
 
 
-    public void alterTableForPasswordChange(String newPassword, String username) throws SQLException
+    public void updateTableForPasswordChange(String newPassword, String username) throws SQLException
     {
         PreparedStatement thisStatement = dataBaseConnection.prepareStatement("UPDATE accounts SET password = ? WHERE username = ?");
         thisStatement.setString(1, newPassword);
@@ -80,13 +82,29 @@ public class DataBase
 
     public void addAdmin() throws SQLException
     {
-        PreparedStatement thisStatement = dataBaseConnection.prepareStatement("SELECT * from accounts WHERE id = 0");
-            thisStatement = DataBase.getInstance().dataBaseConnection.prepareStatement("INSERT INTO accounts (username, password) values (?, ?)");
-            thisStatement.setString(1, "admin");
-            thisStatement.setString(2, "admin");
-          //  thisStatement.setString(3, "admin@admin.com");
+            //PreparedStatement thisStatement = dataBaseConnection.prepareStatement("SELECT * from accounts WHERE id = 0");
+            PreparedStatement thisStatement = DataBase.getInstance().dataBaseConnection.prepareStatement("INSERT INTO accounts (username, password) values (?, ?)");
+            thisStatement.setString(1, Admin.getInstance().getUsername());
+            thisStatement.setString(2, Admin.getInstance().getPassword());
 
             thisStatement.executeUpdate();
     }
 
+    public void resetAutoIncrement() throws SQLException
+    {
+        PreparedStatement thisStatement = dataBaseConnection.prepareStatement("SET @number := 0");
+        thisStatement.executeUpdate();
+
+        thisStatement = DataBase.getInstance().dataBaseConnection.prepareStatement("UPDATE accounts SET ID = @number := (@number + 1)");
+        thisStatement.executeUpdate();
+
+        thisStatement = DataBase.getInstance().dataBaseConnection.prepareStatement("ALTER TABLE accounts AUTO_INCREMENT =1");
+        thisStatement.executeUpdate();
+    }
+
+    public void emptyDataBase() throws SQLException
+    {
+        PreparedStatement thisStatement = dataBaseConnection.prepareStatement("DELETE FROM accounts");
+        thisStatement.executeUpdate();
+    }
 }

@@ -8,8 +8,10 @@ public class Main
         User thisCrap = new User("this", "this", "this", "this", "this");
         try
         {
-            DataBase.getInstance().addAdmin(); //Alooo, nenea Adminu'. Sunteti prea fancy sa intrati in db?
-            Admin.addUser(thisCrap);
+            DataBase.getInstance().addAdmin();
+            Admin.getInstance().addUser(thisCrap);
+            Admin.getInstance().addUser(thisCrap);
+            Admin.getInstance().deleteUser(thisCrap);
         }
         catch(Exception e)
         {

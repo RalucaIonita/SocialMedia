@@ -8,12 +8,12 @@ public class User extends Account
     protected Profile profile;
 
 
-    public User(String givenEmail, String givenPassword, String firstName, String lastName, String username)
+    public User(String email, String password, String firstName, String lastName, String username)
     {
-        super(givenEmail, givenPassword);
+        super(username, password);
+        this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.username = username;
     }
 
     public String getFirstName() {

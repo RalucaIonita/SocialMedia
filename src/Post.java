@@ -1,10 +1,11 @@
+import java.awt.image.BufferedImage;
 import java.util.Vector;
 
 public class Post {
 
-    protected String description;
-    //imagine (?)
-    protected Vector<Comment> comments;
+    private String description;
+    private BufferedImage picture;
+    private Vector<Comment> comments;
 
 
     public String getDescription() {
@@ -21,5 +22,13 @@ public class Post {
 
     public void setComments(Vector<Comment> comments) {
         this.comments = comments;
+    }
+
+    public BufferedImage getPicture() {
+        return picture;
+    }
+
+    public void setPicture(BufferedImage picture) {
+        this.picture = picture;
     }
 }

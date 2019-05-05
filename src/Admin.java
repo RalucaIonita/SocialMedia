@@ -2,24 +2,23 @@ import java.sql.SQLException;
 
 class Admin extends Account
 {
- // private DataBase dataBase;
+    //private DataBase dataBase;
     protected Network network;
 
     private static Admin adminInstance;
 
-    private Admin() throws SQLException //take care of this shit
+    private Admin()
     {
-        adminInstance.password = "admin";
-        adminInstance.username = "admin";
+        password = "admin";
+        username = "admin";
     }
 
-    public static Admin getIntance() throws SQLException //and this shit
+    public static Admin getInstance()
     {
         if(adminInstance == null)
         {
             adminInstance = new Admin();
         }
-
         return adminInstance;
     }
 
@@ -27,20 +26,25 @@ class Admin extends Account
 
 
     //methods
-    public static void addUser(User newUser) throws SQLException
+    public void addUser(User newUser) throws SQLException
     {
         DataBase.getInstance().insert(newUser);
     }
 
-    public void deleteUser(String username) throws SQLException
+    public void deleteUser(User user) throws SQLException
     {
-        DataBase.getInstance().delete(username);
+        DataBase.getInstance().delete(user.getUsername());
+        DataBase.getInstance().resetAutoIncrement();
     }
 
     public void changeAccountPassword(String newPassword, Account givenAccount) throws SQLException
     {
-        DataBase.getInstance().alterTableForPasswordChange(newPassword, givenAccount.username);
-        changeAccountPassword(newPassword, givenAccount);
+        DataBase.getInstance().updateTableForPasswordChange(newPassword, givenAccount.getUsername());
     }
 
+    public void emptyDataBase() throws SQLException
+    {
+        DataBase.getInstance().emptyDataBase();
+        DataBase.getInstance().resetAutoIncrement();
+    }
 }
