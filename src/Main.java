@@ -14,8 +14,14 @@ public class Main
             Admin.getInstance().searchByFirstName(thisCrap.getFirstName());
             Admin.getInstance().searchByLastName(thisCrap.getLastName());
             Admin.getInstance().searchByUsername(thisCrap.getUsername());
+            Admin.getInstance().changeAccountPassword("banane", thisCrap);
        //       Admin.getInstance().emptyDataBase();
+
+            DataBase.getInstance().closeConnection();
+            Post newPost = new Post("smth", "E:\\Pandas and junk\\Images\\Cute-Animated-Panda-HD-Wallpapers-8.jpg");
+            thisCrap.addPicture(newPost);
         }
+
         catch(Exception e)
         {
             e.printStackTrace();

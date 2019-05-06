@@ -1,4 +1,3 @@
-import java.awt.image.BufferedImage;
 import java.sql.SQLException;
 
 class Admin extends Account

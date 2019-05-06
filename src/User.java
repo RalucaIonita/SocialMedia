@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class User extends Account
 {
     private String firstName;
@@ -5,8 +7,15 @@ public class User extends Account
     private String email;
 
 
-    protected Profile profile;
+    private Profile profile;
 
+    User()
+    {
+        this.firstName = new String();
+        this.lastName = new String();
+        this.email = new String();
+        this.profile = new Profile();
+    }
 
     public User(String email, String password, String firstName, String lastName, String username)
     {
@@ -70,6 +79,16 @@ public class User extends Account
     }
 
 
+    public void addProfilePicture(String path) //get back to it
+    {
+       // vezi input, cauta in vector si apeleaza setter-ul de profile picture din profile
+    }
+
+    public void addPicture(Post newPost) throws IOException
+    {
+        profile.addPost(newPost);
+        System.out.println("Merge");
+    }
 
     public void addDescriptionToPicture(String description) //Asta momentan e bullshit, dar o sa fie ceva
     {
@@ -77,5 +96,7 @@ public class User extends Account
 
         //set description to the image
     }
+
+
 
 }

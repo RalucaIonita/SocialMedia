@@ -131,4 +131,9 @@ public class DataBase
         PreparedStatement thisStatement = dataBaseConnection.prepareStatement("DELETE FROM accounts");
         thisStatement.executeUpdate();
     }
+
+    public void closeConnection() throws SQLException
+    {
+        dataBaseConnection.close();
+    }
 }

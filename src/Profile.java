@@ -1,11 +1,17 @@
-import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Vector;
 
 public class Profile {
 
-    private User user;
+    //private User user;
     private Post profilePicture;
     private Vector<Post> album;
+
+    Profile()
+    {
+        profilePicture = new Post();
+        album = new Vector<>();
+    }
 
     //Album
 
@@ -15,17 +21,6 @@ public class Profile {
 
     public void setAlbum(Vector<Post> album) {
         this.album = album;
-    }
-
-
-    //User
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
 
@@ -39,4 +34,10 @@ public class Profile {
         this.profilePicture = profilePicture;
     }
 
+
+    //Adding pictures
+    public void addPost(Post newPost) throws IOException
+    {
+        album.add(newPost);
+    }
 }
