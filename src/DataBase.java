@@ -6,7 +6,6 @@ public class DataBase
 
     private static DataBase dataBaseInstance;
 
-    //
 
     private DataBase() throws SQLException
     {
@@ -22,7 +21,8 @@ public class DataBase
         return dataBaseInstance;
     }
 
-    //
+
+    //Methods
 
     public void insert(User newUser) throws SQLException
     {
@@ -36,19 +36,19 @@ public class DataBase
        thisStatement.executeUpdate();
     }
 
-    public void delete(String givenUsername) throws SQLException
+    public void delete(String username) throws SQLException
     {
         PreparedStatement thisStatement = DataBase.getInstance().dataBaseConnection.prepareStatement("DELETE FROM accounts WHERE username = ?");
-        thisStatement.setString(1, givenUsername);
+        thisStatement.setString(1, username);
         thisStatement.executeUpdate();
 
     }
 
-    public User selectByUsername(String givenUsername) throws SQLException
+    public User selectByUsername(String username) throws SQLException
     {
         User resultedAccount = null;
         PreparedStatement thisStatement = dataBaseConnection.prepareStatement("SELECT * from accounts WHERE username = ?");
-        thisStatement.setString(1, givenUsername);
+        thisStatement.setString(1, username);
         ResultSet result = thisStatement.executeQuery();
         while(result.next())
         {
@@ -57,18 +57,43 @@ public class DataBase
         return resultedAccount;
     }
 
-    public void selectByFirstName(String givenFirstName) throws SQLException
+    public User selectByFirstName(String firstName) throws SQLException
     {
+        User resultedUser = null;
         PreparedStatement thisStatement = dataBaseConnection.prepareStatement("SELECT * from accounts WHERE first_name = ?");
-        thisStatement.setString(1, givenFirstName);
+        thisStatement.setString(1, firstName);
         ResultSet result = thisStatement.executeQuery();
+        while(result.next())
+        {
+            resultedUser = new User(result.getString("email"), result.getString("password"), result.getString("first_name"), result.getString("last_name"), result.getString("username"));
+        }
+        return resultedUser;
     }
 
-    public void selectByLastName(String givenLastName) throws SQLException
+    public User selectByLastName(String lastName) throws SQLException
     {
+        User resultedUser = null;
         PreparedStatement thisStatement = dataBaseConnection.prepareStatement("SELECT * from accounts WHERE last_name = ?");
-        thisStatement.setString(1, givenLastName);
+        thisStatement.setString(1, lastName);
         ResultSet result = thisStatement.executeQuery();
+        while(result.next())
+        {
+            resultedUser = new User(result.getString("email"), result.getString("password"), result.getString("first_name"), result.getString("last_name"), result.getString("username"));
+        }
+        return resultedUser;
+    }
+
+    public User selectByID(Integer ID) throws SQLException
+    {
+        User resultedUser = null;
+        PreparedStatement thisStatement = dataBaseConnection.prepareStatement("SELECT * from accounts WHERE ID = ?");
+        thisStatement.setInt(1, ID);
+        ResultSet result = thisStatement.executeQuery();
+        while(result.next())
+        {
+            resultedUser = new User(result.getString("email"), result.getString("password"), result.getString("first_name"), result.getString("last_name"), result.getString("username"));
+        }
+        return resultedUser;
     }
 
 
@@ -82,7 +107,6 @@ public class DataBase
 
     public void addAdmin() throws SQLException
     {
-            //PreparedStatement thisStatement = dataBaseConnection.prepareStatement("SELECT * from accounts WHERE id = 0");
             PreparedStatement thisStatement = DataBase.getInstance().dataBaseConnection.prepareStatement("INSERT INTO accounts (username, password) values (?, ?)");
             thisStatement.setString(1, Admin.getInstance().getUsername());
             thisStatement.setString(2, Admin.getInstance().getPassword());

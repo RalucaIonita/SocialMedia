@@ -3,9 +3,8 @@ import java.sql.SQLException;
 public class Account
 {
     //Data
-    protected static Integer ID;
+    private static Integer ID;
     protected String password;
-  //  protected String email;
     protected String username;
 
     //Methods
@@ -20,6 +19,14 @@ public class Account
         password = givenPassword;
     }
 
+    Account(Account givenAccount)
+    {
+        ID = givenAccount.ID;
+        password = givenAccount.password;
+    }
+
+
+    //Username
 
     public String getUsername() {
         return username;
@@ -29,12 +36,8 @@ public class Account
         this.username = username;
     }
 
-    Account(Account givenAccount)
-    {
-        ID = givenAccount.ID;
-        password = givenAccount.password;
-    }
 
+    //ID
 
     public int getID() {
         return ID;
@@ -44,6 +47,8 @@ public class Account
         this.ID = ID;
     }
 
+
+    //Password
 
     public String getPassword() {
         return password;

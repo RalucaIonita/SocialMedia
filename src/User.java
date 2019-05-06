@@ -16,6 +16,9 @@ public class User extends Account
         this.lastName = lastName;
     }
 
+
+    //First name
+
     public String getFirstName() {
         return firstName;
     }
@@ -24,13 +27,8 @@ public class User extends Account
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    //Last name
 
     public String getLastName() {
         return lastName;
@@ -40,6 +38,20 @@ public class User extends Account
         this.lastName = lastName;
     }
 
+
+    //Email
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+
+    //Profile
+
     public Profile getProfile() {
         return profile;
     }
@@ -48,5 +60,22 @@ public class User extends Account
         this.profile = profile;
     }
 
+
+    //To String
+
+    public String userToString()
+    {
+        String result = email + " "+ firstName + " " + lastName;
+        return result;
+    }
+
+
+
+    public void addDescriptionToPicture(String description) //Asta momentan e bullshit, dar o sa fie ceva
+    {
+        //get some kind of input
+
+        //set description to the image
+    }
 
 }

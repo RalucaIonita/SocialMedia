@@ -8,6 +8,8 @@ public class Post {
     private Vector<Comment> comments;
 
 
+    //Description
+
     public String getDescription() {
         return description;
     }
@@ -16,6 +18,9 @@ public class Post {
         this.description = description;
     }
 
+
+    //Comments
+
     public Vector<Comment> getComments() {
         return comments;
     }
@@ -23,6 +28,9 @@ public class Post {
     public void setComments(Vector<Comment> comments) {
         this.comments = comments;
     }
+
+
+    //Images
 
     public BufferedImage getPicture() {
         return picture;

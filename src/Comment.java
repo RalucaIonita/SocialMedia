@@ -2,6 +2,9 @@ public class Comment {
     protected User owner;
     protected String content;
 
+
+    //Owner
+
     public User getOwner() {
         return owner;
     }
@@ -9,6 +12,9 @@ public class Comment {
     public void setOwner(User owner) {
         this.owner = owner;
     }
+
+
+    //Content
 
     public String getContent() {
         return content;

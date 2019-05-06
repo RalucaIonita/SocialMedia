@@ -1,3 +1,4 @@
+import java.awt.image.BufferedImage;
 import java.sql.SQLException;
 
 class Admin extends Account
@@ -25,7 +26,8 @@ class Admin extends Account
 
 
 
-    //methods
+    //Methods
+
     public void addUser(User newUser) throws SQLException
     {
         DataBase.getInstance().insert(newUser);
@@ -47,4 +49,29 @@ class Admin extends Account
         DataBase.getInstance().emptyDataBase();
         DataBase.getInstance().resetAutoIncrement();
     }
+
+    public void searchByFirstName(String firstName) throws SQLException
+    {
+        User resultedUser = DataBase.getInstance().selectByFirstName(firstName);
+        System.out.println(resultedUser.userToString()); //will not use sout in future versions
+    }
+
+    public void searchByLastName(String lastName) throws SQLException
+    {
+        User resultedUser = DataBase.getInstance().selectByLastName(lastName);
+        System.out.println(resultedUser.userToString()); //will not use sout in future versions
+    }
+
+    public void searchByUsername(String username) throws SQLException
+    {
+        User resultedUser = DataBase.getInstance().selectByUsername(username);
+        System.out.println(resultedUser.userToString()); //will not use sout in future versions
+    }
+
+    public void searchByID(Integer ID) throws SQLException
+    {
+        User resultedUser = DataBase.getInstance().selectByID(ID);
+        System.out.println(resultedUser.userToString()); //will not use sout in future versions
+    }
+
 }

@@ -10,8 +10,11 @@ public class Main
         {
             DataBase.getInstance().addAdmin();
             Admin.getInstance().addUser(thisCrap);
-            Admin.getInstance().addUser(thisCrap);
-            Admin.getInstance().deleteUser(thisCrap);
+            //Admin.getInstance().addUser(thisCrap);
+            Admin.getInstance().searchByFirstName(thisCrap.getFirstName());
+            Admin.getInstance().searchByLastName(thisCrap.getLastName());
+            Admin.getInstance().searchByUsername(thisCrap.getUsername());
+       //       Admin.getInstance().emptyDataBase();
         }
         catch(Exception e)
         {
