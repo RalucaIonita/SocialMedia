@@ -1,10 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Panda
-  Date: 5/26/2019
-  Time: 7:30 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="models.Admin" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -73,14 +68,33 @@
 
 
 <div class = "center">
-  <form action="profile.jsp" method="post">
-    Username <input type="text" name="username" id = "usernameInput"><br><br>
-    Password <input type="password" name="password" id = "passwordInput"><br>
+  <form method="get">
+    Username <input type="text" name="username" id = "username"><br><br>
+    Password <input type="password" name="password" id = "password"><br>
     <br>
 
     <input type="submit" value="Submit">
 
   </form>
+  <%
+    String username = request.getParameter("username");
+    String password = request.getParameter("password");
+    try {
+      if (Admin.getInstance().searchByUsername(username))
+      {
+        request.getRequestDispatcher("profile.jsp").forward(request, response);
+        out.println("Cont gasit");
+      }
+        else
+      {
+        out.println("Username invalid");
+      }
+    }
+    catch(Exception e)
+    {
+      e.printStackTrace();
+    }
+  %>
   <br>
 
   <a href="create_account.jsp"> Don't have an account? </a>

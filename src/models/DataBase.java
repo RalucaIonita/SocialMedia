@@ -2,6 +2,8 @@ package models;
 
 import java.sql.*;
 
+import static java.sql.DriverManager.getConnection;
+
 public class DataBase
 {
     private Connection dataBaseConnection;
@@ -11,7 +13,13 @@ public class DataBase
 
     private DataBase() throws SQLException
     {
-        dataBaseConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/social_media?autoReconnect=true&useSSL=false", "root", "");
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        dataBaseConnection = getConnection("jdbc:mysql://localhost:3306/social_media?autoReconnect=true&useSSL=false", "root", "");
     }
 
     public static DataBase getInstance() throws SQLException
@@ -26,8 +34,6 @@ public class DataBase
     public Connection getDataBaseConnection() {
         return dataBaseConnection;
     }
-
-    //webMethods.Methods
 
     public void insertUser(User newUser) throws SQLException
     {

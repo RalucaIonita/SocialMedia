@@ -1,7 +1,4 @@
 <%@ page import="models.*" %>
-<%@ page import ="webMethods.*"%>
-<%@ page import="java.io.PrintWriter" %>
-<%@ page import="models.Admin" %>
 <%--
   Created by IntelliJ IDEA.
   User: Panda
@@ -72,7 +69,7 @@
 
 
 <div class = "center">
-    <form action="Methods.java" method="post">
+    <form method = "get">
 
         First name <input type="text" name="first_name" id = "first_name" required><br><br>
         Last name <input type="text" name="last_name" id = "last_name" required><br><br>
@@ -81,11 +78,32 @@
         Password <input type="password" name="password" id = "password" required><br>
         <br>
         <input type="submit" value="Submit">
-        <%
-
-        %>
+        <br>
     </form>
-    <br>
+        <%
+                String email = request.getParameter("email");
+                out.print(email);
+                String password = request.getParameter("password");
+                String firstName = request.getParameter("first_name");
+                String lastName = request.getParameter("last_name");
+                String username = request.getParameter("username");
+
+                User newUser = new User(email, password, firstName, lastName, username);
+
+                out.println(newUser);
+                try {
+                    out.println(email + password + firstName + lastName + username);
+                    if(email != null)
+                    Admin.getInstance().addUser(newUser);
+                    if(email != null)
+                        request.getRequestDispatcher("index.jsp").forward(request, response);
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+        %>
+
 
     <a href="index.jsp"> Already have an account? </a>
 

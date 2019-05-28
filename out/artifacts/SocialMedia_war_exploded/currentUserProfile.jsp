@@ -1,11 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Panda
-  Date: 5/27/2019
-  Time: 2:30 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="models.Admin" %>
 <html>
 
 <head>
@@ -207,7 +200,7 @@
         }
 
         .card.hovercard .cardheader {
-            background: url("http://lorempixel.com/output/animals-q-c-850-280-6.jpg");
+            background: url("https://www.google.com/search?q=cover+photo&tbm=isch&source=hp&sa=X&ved=2ahUKEwjM8qHW7L3iAhVCU1AKHYTBBpIQsAR6BAgHEAE&biw=1536&bih=722&dpr=1.25#imgrc=uP1oQlBP2Q1Y_M:");
             background-size: cover;
             height: 135px;
         }
@@ -256,6 +249,59 @@
 
         .btn{ border-radius: 50%; width:32px; height:32px; line-height:18px;  }
 
+        .topnav {
+            overflow: hidden;
+            background-color: #e9e9e9;
+        }
+
+        /* Style the links inside the navigation bar */
+        .topnav a {
+            float: left;
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        /* Change the color of links on hover */
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Style the "active" element to highlight the current page */
+        .topnav a.active {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        /* Style the search box inside the navigation bar */
+        .topnav input[type=text] {
+            float: right;
+            padding: 6px;
+            border: none;
+            margin-top: 8px;
+            margin-right: 16px;
+            font-size: 17px;
+        }
+
+        /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
+        @media screen and (max-width: 600px) {
+            .topnav a, .topnav input[type=text] {
+                float: none;
+                display: block;
+                text-align: left;
+                width: 100%;
+                margin: 0;
+                padding: 14px;
+            }
+            .topnav input[type=text] {
+                border: 1px solid #ccc;
+            }
+        }
+
     </style>
 
 </head>
@@ -277,28 +323,55 @@
 
                 </div>
                 <div class="avatar">
-                    <img alt="" src="C:\Users\catal\Desktop">
+                    <img alt="" src="jlo.jpg">
                 </div>
                 <div class="info">
                     <div class="title">
-                        <a target="_blank" href="https://scripteden.com/">Script Eden</a>
+                        <a target="_blank" href="https://www.google.com/search?q=jennifer+lopez&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjW1O206b3iAhVEIlAKHc5QDQ0Q_AUIDigB&biw=1536&bih=722">Jennifer Lopez</a>
                     </div>
-                    <div class="desc">Passionate designer</div>
-                    <div class="desc">Curious developer</div>
-                    <div class="desc">Tech geek</div>
+                    <div class="desc">Latino singer</div>
+                    <div class="desc">Workout lover</div>
+                    <div class="desc">Big booty</div>
                 </div>
                 <div class="bottom">
-                    <a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/webmaniac">
-                        <i class="fa fa-twitter"></i>
+                    <a href = " https://twitter.com/jlo ">
+                        <button>Check Twitter</button>
                     </a>
-                    <a class="btn btn-danger btn-sm" rel="publisher"
-                       href="https://plus.google.com/+ahmshahnuralam">
-                        <i class="fa fa-google-plus"></i>
+
+                    <a href = " https://www.facebook.com/jenniferlopez/ ">
+                        <button>Check Facebook</button>
                     </a>
-                    <a class="btn btn-primary btn-sm" rel="publisher"
-                       href="https://plus.google.com/shahnuralam">
-                        <i class="fa fa-facebook"></i>
+
+                    <a href = " https://www.instagram.com/jlo/?hl=ro ">
+                        <button>Check Instagram</button>
                     </a>
+
+                    <div class="topnav">
+                        <a class="active" href="#home">Home</a>
+                        <a href="#about">About</a>
+                        <a href="#contact">Contact</a>
+                        <form method = "get">
+                            <input type="text" placeholder="Search..">
+
+                            <%
+                                try
+                                {
+                                String username = request.getParameter("username");
+
+                                out.println(Admin.getInstance().searchByUsername(username));
+                                }
+                                catch (Exception e)
+                                {
+                                    e.printStackTrace();
+                                }
+                            %>
+
+                            <input type="submit" value="Search">
+
+                        </form>
+
+                    </div>
+
                 </div>
             </div>
 

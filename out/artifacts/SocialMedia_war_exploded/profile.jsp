@@ -299,9 +299,6 @@
                        href="https://plus.google.com/shahnuralam">
                         <i class="fa fa-facebook"></i>
                     </a>
-                    <a class="btn btn-warning btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
-                        <i class="fa fa-behance"></i>
-                    </a>
                 </div>
             </div>
 
